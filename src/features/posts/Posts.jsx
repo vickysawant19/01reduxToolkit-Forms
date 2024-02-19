@@ -28,7 +28,7 @@ const Posts = () => {
   });
   return (
     <>
-      <div className="max-w-screen-md">
+      <div className="md:max-w-screen-md md:flex gap-2 ">
         <AddPost />
         <div className="">{content ? content : ""}</div>
       </div>
