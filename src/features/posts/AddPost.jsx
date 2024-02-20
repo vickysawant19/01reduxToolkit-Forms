@@ -19,13 +19,12 @@ const AddPost = () => {
 
   const isAllowed = Boolean(title && content && userid);
   const handleSubmit = () => {
-    console.log(userid);
     if (isAllowed) {
       dispatch(addPost(title, content, userid));
     }
   };
   return (
-    <div className="border bg-gray-500 p-2 w-full mb-1 h-fit sticky top-2">
+    <div className="border bg-gray-500 p-2 w-96 mb-1 h-fit sticky top-2">
       <h1 className="w-full text-center text-xl font-semibold py-2">AddPost</h1>
       <hr />
       <div className="p-2 w-full flex flex-col ">

@@ -4,7 +4,8 @@ import { selectAllUsers } from "../users/usersSlice";
 
 const PostedBy = ({ userid }) => {
   const users = useSelector(selectAllUsers);
-  const user = users.find((user) => user.id === userid);
+
+  const user = users.find((user) => user.id === Number(userid));
 
   return (
     <div className="text-gray-800">

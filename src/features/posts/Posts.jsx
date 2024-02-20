@@ -1,6 +1,6 @@
-import React from "react";
-import { useSelector } from "react-redux";
-import { selectAllPosts } from "./postSlice";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchPosts, getStatus, selectAllPosts } from "./postSlice";
 
 import PostedBy from "./PostedBy";
 import Timestamp from "./Timestamp";
@@ -9,6 +9,15 @@ import Reactions from "./Reactions";
 
 const Posts = () => {
   const posts = useSelector(selectAllPosts);
+  const status = useSelector(getStatus);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (status === "idle") {
+      dispatch(fetchPosts());
+    }
+  }, [dispatch, posts]);
+
   const sortedPosts = [...posts].sort((a, b) =>
     b.timestamp.localeCompare(a.timestamp)
   );
@@ -28,9 +37,13 @@ const Posts = () => {
   });
   return (
     <>
-      <div className="md:max-w-screen-md md:flex gap-2 ">
-        <AddPost />
-        <div className="">{content ? content : ""}</div>
+      <div className="flex flex-col items-center md:max-w-screen-md md:flex gap-2 ">
+        <div className="w-96">
+          <AddPost />
+        </div>
+        <div className="mx-2">
+          {status === "Success" ? content : <>Loading..</>}
+        </div>
       </div>
     </>
   );
