@@ -12,7 +12,7 @@ const UsersList = () => {
       className="flex flex-col bg-slate-400 min-h-screen
       "
     >
-      <h1 className="font-semibold"> Users List:</h1>
+      <h1 className="font-semibold m-2 "> Users List:</h1>
       {users.map((user) => {
         const userPosts = posts.filter((post) => post.userid === user.id);
         return (

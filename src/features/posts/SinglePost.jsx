@@ -13,16 +13,16 @@ const SinglePost = () => {
   let content = "";
   if (post) {
     content = (
-      <div className="min-h-screen mb-2 p-2 bg-gradient-to-tr from-slate-500 to-slate-400 rounded ">
+      <div className="min-h-screen mb-2 bg-gradient-to-tr from-slate-500 to-slate-400  p-10 ">
         <Link
           to={`/edit/${post.id}`}
-          className="bg-green-200 absolute right-0 p-1 border mr-2 rounded"
+          className="bg-green-200 absolute right-0 p-1 border mr-4 rounded"
         >
           Edit
         </Link>
-        <div className=" text-4xl capitalize">{post.title}</div>
+        <div className=" text-4xl capitalize h-20 pt-2">{post.title}</div>
         <div className="text-xl">{post.content}</div>
-        <div className="flex text-xl justify-between mt-2 ">
+        <div className="flex text-xl justify-between my-10  ">
           <PostedBy userid={post.userid} />
           <Timestamp time={post.timestamp} />
         </div>
