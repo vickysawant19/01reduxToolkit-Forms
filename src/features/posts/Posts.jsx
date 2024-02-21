@@ -24,7 +24,10 @@ const Posts = () => {
 
   const content = sortedPosts.map((post, index) => {
     return (
-      <div className="border mb-2 p-2 bg-slate-500 " key={post.id}>
+      <div
+        className=" mb-2 p-2 bg-gradient-to-tr from-slate-500 to-slate-400 rounded "
+        key={post.id}
+      >
         <h1 className=" text-2xl capitalize">{post.title}</h1>
         <div>{post.content}</div>
         <div className="flex justify-between mt-2 ">

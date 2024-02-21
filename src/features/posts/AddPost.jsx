@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { selectAllUsers } from "../users/usersSlice";
-import { addPost } from "./postSlice";
+import { addPost, addToPosts } from "./postSlice";
 
 const AddPost = () => {
   const [title, setTitle] = useState("");
@@ -20,7 +20,8 @@ const AddPost = () => {
   const isAllowed = Boolean(title && content && userid);
   const handleSubmit = () => {
     if (isAllowed) {
-      dispatch(addPost(title, content, userid));
+      // dispatch(addPost(title, content, userid));
+      dispatch(addToPosts({ title, content, userid }));
     }
   };
   return (

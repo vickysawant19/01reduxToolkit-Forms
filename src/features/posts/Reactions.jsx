@@ -18,7 +18,7 @@ const Reactions = ({ reactions, id }) => {
         Object.entries(reactions).map(([reactionName, reactionValue]) => (
           <button
             onClick={() => dispatch(addReaction({ reactionName, id }))}
-            className="p-1 capitalize hover:font-semibold border rounded-full mt-1 px-2"
+            className="p-1 capitalize hover:font-semibold  bg-gradient-to-br from-slate-600 to-slate-300 rounded-full mt-1 px-2"
             key={reactionName}
           >
             {reactionEmoji[reactionName]} {reactionValue}

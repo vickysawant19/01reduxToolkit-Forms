@@ -8,6 +8,26 @@ const initialState = {
   error: "",
 };
 
+export const addToPosts = createAsyncThunk(
+  "posts/addToPosts",
+  async ({ title, content, userid }) => {
+    const postData = {
+      title,
+      content,
+      userid,
+    };
+    try {
+      const res = await axios.post(
+        "https://jsonplaceholder.typicode.com/posts",
+        postData
+      );
+      return res.data;
+    } catch (error) {
+      return error;
+    }
+  }
+);
+
 export const fetchPosts = createAsyncThunk("posts/fetchPosts", async () => {
   try {
     const res = await axios.get("https://jsonplaceholder.typicode.com/posts");
@@ -26,7 +46,7 @@ export const postsSlice = createSlice({
       reducer: (state, action) => {
         state.posts.push(action.payload);
       },
-      prepare: (title, content, userid) => {
+      prepare: ({ title, content, userid }) => {
         const id = nanoid();
         const timestamp = new Date().toISOString();
         return {
@@ -87,6 +107,21 @@ export const postsSlice = createSlice({
       })
       .addCase(fetchPosts.rejected, (state, action) => {
         state.error = action.error;
+      })
+      .addCase(addToPosts.fulfilled, (state, action) => {
+        const postData = {
+          ...action.payload,
+          id: state.posts.length + 1,
+          timestamp: new Date().toISOString(),
+          reactions: {
+            thumb: 0,
+            heart: 0,
+            wow: 0,
+            rocket: 0,
+            coffee: 0,
+          },
+        };
+        state.posts.push(postData);
       });
   },
 });
