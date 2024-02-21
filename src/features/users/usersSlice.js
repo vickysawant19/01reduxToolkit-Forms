@@ -38,4 +38,9 @@ export const {} = usersSlice.actions;
 export const getStatus = (state) => state.users.status;
 export const getError = (state) => state.users.error;
 export const selectAllUsers = (state) => state.users.users;
+export const selectUser = (state, id) => {
+  const user = state.users.users.find((user) => user.id === Number(id));
+  return user;
+};
+
 export default usersSlice.reducer;

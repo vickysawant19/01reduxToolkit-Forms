@@ -6,6 +6,7 @@ import PostedBy from "./PostedBy";
 import Timestamp from "./Timestamp";
 import AddPost from "./AddPost";
 import Reactions from "./Reactions";
+import { Link } from "react-router-dom";
 
 const Posts = () => {
   const posts = useSelector(selectAllPosts);
@@ -25,11 +26,13 @@ const Posts = () => {
   const content = sortedPosts.map((post, index) => {
     return (
       <div
-        className=" mb-2 p-2 bg-gradient-to-tr from-slate-500 to-slate-400 rounded "
+        className="w-full p-2 bg-gradient-to-tr from-slate-500 to-slate-400  shadow-xl "
         key={post.id}
       >
-        <h1 className=" text-2xl capitalize">{post.title}</h1>
-        <div>{post.content}</div>
+        <Link to={`${post.id}`} className=" text-2xl capitalize">
+          {post.title}
+        </Link>
+        <div>{post.content.substring(0, 100)}</div>
         <div className="flex justify-between mt-2 ">
           <PostedBy userid={post.userid} />
           <Timestamp time={post.timestamp} />
@@ -40,13 +43,8 @@ const Posts = () => {
   });
   return (
     <>
-      <div className="flex flex-col items-center md:max-w-screen-md md:flex gap-2 ">
-        <div className="w-96">
-          <AddPost />
-        </div>
-        <div className="mx-2">
-          {status === "Success" ? content : <>Loading..</>}
-        </div>
+      <div className="flex flex-col items-center  md:max-w-screen-md md:flex gap-1">
+        {status === "Success" ? content : <>Loading..</>}
       </div>
     </>
   );
