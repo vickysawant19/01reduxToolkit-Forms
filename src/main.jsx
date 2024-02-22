@@ -18,6 +18,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
       <BrowserRouter>
         <Routes>
           <Route path="" element={<App />}>
+            <Route index path="/" element={<Posts />} />
             <Route path="/posts" element={<Posts />} />
             <Route path="/posts/:id" element={<SinglePost />} />
             <Route path="/addpost" element={<AddPost />} />

@@ -20,9 +20,9 @@ function App() {
 
   return (
     <>
-      <div className="max-w-screen-md mx-auto relative">
+      <div className="max-w-screen-md mx-auto relative ">
         <Navbar />
-        <div className="mt-14">
+        <div className="mt-14 bg-slate-300 h-screen">
           <Outlet />
         </div>
       </div>

@@ -8,6 +8,17 @@ const initialState = {
   error: "",
 };
 
+export const deletePost = createAsyncThunk(
+  "posts/deletePost",
+  async ({ id }) => {
+    const result = await axios.delete(
+      `https://jsonplaceholder.typicode.com/posts/${id}`
+    );
+
+    return id;
+  }
+);
+
 export const addToPosts = createAsyncThunk(
   "posts/addToPosts",
   async ({ title, content, userid }) => {
@@ -99,13 +110,11 @@ export const postsSlice = createSlice({
       })
 
       .addCase(fetchPosts.fulfilled, (state, action) => {
-        state.status = "Success";
         let min = -1;
-
         const posts = action.payload.map((post) => {
           const { body: content, userId: userid, ...post1 } = post;
-          // min++;
-          min = Math.floor(Math.random() * 10000) + 1;
+          min++;
+          // min = Math.floor(Math.random() * 10000) + 1;
           return {
             ...post1,
             userid,
@@ -120,8 +129,8 @@ export const postsSlice = createSlice({
             content,
           };
         });
-
         state.posts = posts;
+        state.status = "Success";
       })
       .addCase(fetchPosts.rejected, (state, action) => {
         state.status = "error";
@@ -159,6 +168,14 @@ export const postsSlice = createSlice({
         state.posts = state.posts.map((post) =>
           post.id === updatedPost.id ? updatedPost : post
         );
+      })
+      .addCase(deletePost.pending, (state) => {
+        state.status = "Pending";
+      })
+      .addCase(deletePost.fulfilled, (state, action) => {
+        const id = action.payload;
+        state.posts = state.posts.filter((post) => post.id !== Number(id));
+        state.status = "Success";
       });
   },
 });

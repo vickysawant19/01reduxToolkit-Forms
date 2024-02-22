@@ -26,7 +26,7 @@ const AddPost = () => {
   };
   return (
     <div className="w-full flex justify-center bg-slate-400 min-h-screen">
-      <div className="rounded shadow-xl border mt-20 bg-slate-500 p-2 w-96 mb-1 h-fit sticky top-2">
+      <div className="rounded shadow-xl border mt-20 bg-slate-500 p-2 w-full mx-10 mb-1 h-full">
         <h1 className="w-full text-center text-xl font-semibold py-2">
           AddPost
         </h1>
